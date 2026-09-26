@@ -1,0 +1,202 @@
+-- ==========================================================
+-- ORIN HUB | ULTIMATE MEGA PROFESSIONAL EDITION (67+ FUNÇÕES)
+-- Criado por: Mooza 👑
+-- ==========================================================
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+-- Serviços Essenciais
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local mouse = player:GetMouse()
+
+-- Variáveis de Loops e Estados
+local autoFarmActive = false
+local autoClickActive = false
+local autoDashActive = false
+local autoHakiActive = false
+local noclipActive = false
+local flyActive = false
+local espActive = false
+local rainbowSkinActive = false
+local fullbrightActive = false
+local infJumpActive = false
+local antiAfkActive = false
+local speedVal = 16
+local jumpVal = 50
+local fovVal = 70
+
+local Events = ReplicatedStorage:WaitForChild("Events", 5)
+
+-- Criação da Janela
+local Window = OrionLib:MakeWindow({
+   Name = "⚡ ORIN HUB — Mega Professional Edition [67+ Funções] 🌟",
+   HidePremium = false,
+   SaveConfig = true,
+   ConfigFolder = "OrinHubMegaMooza",
+   IntroEnabled = true,
+   IntroText = "Carregando o Poder Absoluto de Mooza...",
+   IntroIcon = "rbxassetid://4483362458",
+   KeySystem = true,
+   KeySettings = {
+      Title = "🔐 Autenticação - Orin Hub",
+      Subtitle = "Exclusivo por Mooza",
+      Note = "Insira a chave secreta: OII-KEY",
+      FileName = "OrinKeyMegaMooza",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"OII-KEY"}
+   }
+})
+
+-- Abas do Hub
+local HomeTab = Window:MakeTab({ Name = "🏠 Início", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local CombatTab = Window:MakeTab({ Name = "⚔️ Combate OP", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local FarmTab = Window:MakeTab({ Name = "💸 Auto Farm & Loja", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local PlayerTab = Window:MakeTab({ Name = "🏃 Modificadores", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local VisualTab = Window:MakeTab({ Name = "👁️ Visuais & ESP", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local TeleportTab = Window:MakeTab({ Name = "📍 Teleportes", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local MiscTab = Window:MakeTab({ Name = "⚙️ Utilidades", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local ExtraTab = Window:MakeTab({ Name = "🚀 Funções Extras", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local CreditTab = Window:MakeTab({ Name = "👑 Créditos", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+
+-- ==========================================================
+-- 1. ABA INÍCIO (Funções 1 a 7)
+-- ==========================================================
+HomeTab:AddSection({ Name = "📊 Informações do Jogador" })
+HomeTab:AddParagraph("Painel Principal", "Criado por Mooza. Este script possui mais de 67 funções avançadas injetadas com sucesso.\n• Jogador: " .. player.Name .. "\n• ID da Conta: " .. player.UserId)
+
+HomeTab:AddButton({ Name = "1. Copiar Nome do Jogador", Callback = function() setclipboard(player.Name) OrionLib:MakeNotification({Name="Copiado", Content="Nome copiado!", Time=2}) end })
+HomeTab:AddButton({ Name = "2. Copiar User ID", Callback = function() setclipboard(tostring(player.UserId)) OrionLib:MakeNotification({Name="Copiado", Content="ID copiado!", Time=2}) end })
+HomeTab:AddButton({ Name = "3. Recarregar o Jogo (Rejoin)", Callback = function() game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, player) end })
+HomeTab:AddButton({ Name = "4. Sair do Jogo (Kick)", Callback = function() player:Kick("Saiu via Orin Hub.") end })
+HomeTab:AddButton({ Name = "5. Ocultar Interface (Toggle UI)", Callback = function() OrionLib:Destroy() end })
+HomeTab:AddButton({ Name = "6. Servidor Hop (Mudar de Server)", Callback = function() 
+   local ids = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100"))
+   for _, s in pairs(ids.data) do if s.playing < s.maxPlayers then game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, s.id, player) break end end
+end })
+HomeTab:AddButton({ Name = "7. Maximizar FPS (Otimização)", Callback = function() 
+   for _, v in pairs(workspace:GetDescendants()) do if v:IsA("BasePart") then v.Material = Enum.Material.SmoothPlastic end end
+end })
+
+-- ==========================================================
+-- 2. ABA COMBATE OP (Funções 8 a 16)
+-- ==========================================================
+CombatTab:AddSection({ Name = "⚡ Ataques e Remotes" })
+
+CombatTab:AddButton({ Name = "8. Disparar RequestDash", Callback = function() if Events and Events:FindFirstChild("RequestDash") then Events.RequestDash:FireServer() end end })
+CombatTab:AddButton({ Name = "9. Alternar HakiToggle", Callback = function() if Events and Events:FindFirstChild("HakiToggle") then Events.HakiToggle:FireServer() end end })
+CombatTab:AddButton({ Name = "10. Ativar LightSkill1", Callback = function() if Events and Events:FindFirstChild("LightSkill1") then Events.LightSkill1:FireServer() end end })
+CombatTab:AddButton({ Name = "11. Executar PlayerAttack", Callback = function() if Events and Events:FindFirstChild("PlayerAttack") then Events.PlayerAttack:FireServer() end end })
+CombatTab:AddButton({ Name = "12. Disparar FistsSkill2", Callback = function() if Events and Events:FindFirstChild("FistsSkill2") then Events.FistsSkill2:FireServer() end end })
+CombatTab:AddToggle({ Name = "13. Auto Clicker de Socos (Loop)", Default = false, Callback = function(v) autoClickActive = v task.spawn(function() while autoClickActive do if Events and Events:FindFirstChild("PlayerAttack") then Events.PlayerAttack:FireServer() end task.wait(0.05) end end) end })
+CombatTab:AddToggle({ Name = "14. Auto Dash Contínuo", Default = false, Callback = function(v) autoDashActive = v task.spawn(function() while autoDashActive do if Events and Events:FindFirstChild("RequestDash") then Events.RequestDash:FireServer() end task.wait(1) end end) end })
+CombatTab:AddToggle({ Name = "15. Auto Haki Loop", Default = false, Callback = function(v) autoHakiActive = v task.spawn(function() while autoHakiActive do if Events and Events:FindFirstChild("HakiToggle") then Events.HakiToggle:FireServer() end task.wait(3) end end) end })
+CombatTab:AddButton({ Name = "16. Executar FlameChargeSkill", Callback = function() if Events and Events:FindFirstChild("FlameChargeSkill") then Events.FlameChargeSkill:FireServer() end end })
+
+-- ==========================================================
+-- 3. ABA AUTO FARM & LOJA (Funções 17 a 26)
+-- ==========================================================
+FarmTab:AddSection({ Name = "💰 Compras e Itens" })
+
+FarmTab:AddButton({ Name = "17. Comprar Katana (StorePurchase)", Callback = function() if Events and Events:FindFirstChild("StorePurchase") then Events.StorePurchase:FireServer("Simple Katana") end end })
+FarmTab:AddButton({ Name = "18. Reivindicar Item (UsetItem)", Callback = function() if Events and Events:FindFirstChild("UsetItem") then Events.UsetItem:FireServer() end end })
+FarmTab:AddButton({ Name = "19. Resgatar Código (RedeemCode)", Callback = function() if Events and Events:FindFirstChild("RedeemCode") then Events.RedeemCode:FireServer("MOOZA_OP_REWARD") end end })
+FarmTab:AddButton({ Name = "20. Gastar Ponto de Status (SpendStatPoint)", Callback = function() if Events and Events:FindFirstChild("SpendStatPoint") then Events.SpendStatPoint:FireServer("Strength") end end })
+FarmTab:AddButton({ Name = "21. Coletar Baú/Recompensa", Callback = function() if Events and Events:FindFirstChild("KingsTrialCollect") then Events.KingsTrialCollect:FireServer() end end })
+FarmTab:AddToggle({ Name = "22. Auto Comprar Espada Loop", Default = false, Callback = function(v) autoFarmActive = v task.spawn(function() while autoFarmActive do if Events and Events:FindFirstChild("StorePurchase") then Events.StorePurchase:FireServer("Simple Katana") end task.wait(2) end end) end })
+FarmTab:AddButton({ Name = "23. Banir Lag Local (Limpeza de Lixo)", Callback = function() for _,v in pairs(game:GetService("Workspace"):GetChildren()) do if v.Name == "Part" or v.Name == "Effect" then v:Destroy() end end end })
+FarmTab:AddButton({ Name = "24. Forçar Atualização de Inventário", Callback = function() if Events and Events:FindFirstChild("InventoryUpdate") then Events.InventoryUpdate:FireServer() end end })
+FarmTab:AddButton({ Name = "25. Atualizar Dados HUD", Callback = function() if Events and Events:FindFirstChild("GetHudData") then Events.GetHudData:InvokeServer() end end })
+FarmTab:AddButton({ Name = "26. Atualizar Mastery Data", Callback = function() if Events and Events:FindFirstChild("GetMasteryData") then Events.GetMasteryData:InvokeServer() end end })
+
+-- ==========================================================
+-- 4. ABA MODIFICADORES (Funções 27 a 37)
+-- ==========================================================
+PlayerTab:AddSection({ Name = "🏃 Stats do Jogador" })
+
+PlayerTab:AddSlider({ Name = "27. Velocidade (WalkSpeed)", Min = 16, Max = 300, Default = 16, Color = Color3.fromRGB(0,170,255), ValueName = "Speed", Callback = function(v) speedVal = v if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.WalkSpeed = v end end })
+PlayerTab:AddSlider({ Name = "28. Força de Pulo (JumpPower)", Min = 50, Max = 350, Default = 50, Color = Color3.fromRGB(0,255,127), ValueName = "Power", Callback = function(v) jumpVal = v if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.JumpPower = v end end })
+PlayerTab:AddToggle({ Name = "29. Noclip (Atravessar Paredes)", Default = false, Callback = function(v) noclipActive = v RunService.Stepped:Connect(function() if noclipActive and player.Character then for _,p in pairs(player.Character:GetDescendants()) do if p:IsA("BasePart") then p.CanCollide = false end end end end) end })
+PlayerTab:AddToggle({ Name = "30. Pulo Infinito (Infinite Jump)", Default = false, Callback = function(v) infJumpActive = v UserInputService.JumpRequest:Connect(function() if infJumpActive and player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end end) end })
+PlayerTab:AddButton({ Name = "31. Resetar Velocidade para o Padrão", Callback = function() if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.WalkSpeed = 16 end end })
+PlayerTab:AddButton({ Name = "32. Resetar Pulo para o Padrão", Callback = function() if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.JumpPower = 50 end end })
+PlayerTab:AddButton({ Name = "33. Curar HP Completo (Visual/Local)", Callback = function() if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.Health = player.Character.Humanoid.MaxHealth end end })
+PlayerTab:AddButton({ Name = "34. Fazer Personagem Flutuar (Anti-Gravidade)", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.Velocity = Vector3.new(0, 50, 0) end end })
+PlayerTab:AddButton({ Name = "35. Sentar no Chão", Callback = function() if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.Sit = true end end })
+PlayerTab:AddButton({ Name = "36. Pular Automaticamente a cada 1s", Callback = function() task.spawn(function() while true do if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end task.wait(1) end end) end })
+PlayerTab:AddButton({ Name = "37. Godmode Falso (Zerar Velocidade Inimiga)", Callback = function() if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.MaxHealth = math.huge player.Character.Humanoid.Health = math.huge end end })
+
+-- ==========================================================
+-- 5. ABA VISUAIS & ESP (Funções 38 a 46)
+-- ==========================================================
+VisualTab:AddSection({ Name = "👁️ Câmera e Iluminação" })
+
+VisualTab:AddToggle({ Name = "38. Fullbright (Visão Noturna)", Default = false, Callback = function(v) fullbrightActive = v if v then Lighting.Brightness = 2 Lighting.ClockTime = 14 Lighting.GlobalShadows = false else Lighting.Brightness = 1 Lighting.GlobalShadows = true end end })
+VisualTab:AddSlider({ Name = "39. Campo de Visão (FOV)", Min = 70, Max = 120, Default = 70, Color = Color3.fromRGB(255,128,0), ValueName = "FOV", Callback = function(v) workspace.CurrentCamera.FieldOfView = v end })
+VisualTab:AddToggle({ Name = "40. Rainbow Skin (Mudar Cores da Roupa)", Default = false, Callback = function(v) rainbowSkinActive = v task.spawn(function() while rainbowSkinActive do for _,p in pairs(player.Character:GetDescendants()) do if p:IsA("BasePart") then p.Color = Color3.fromHSV(tick()%5/5, 1, 1) end end task.wait(0.2) end end) end })
+VisualTab:AddButton({ Name = "41. Remover Névoa do Jogo (Fog Remove)", Callback = function() Lighting.FogEnd = 999999 end })
+VisualTab:AddButton({ Name = "42. Desativar Efeitos de Sombra", Callback = function() Lighting.GlobalShadows = false end })
+VisualTab:AddButton({ Name = "43. Aumentar Brilho do Jogo", Callback = function() Lighting.Brightness = 5 end })
+VisualTab:AddButton({ Name = "44. Definir Horário para Meio-Dia", Callback = function() Lighting.ClockTime = 12 end })
+VisualTab:AddButton({ Name = "45. Definir Horário para Meia-Noite", Callback = function() Lighting.ClockTime = 0 end })
+VisualTab:AddButton({ Name = "46. Restaurar Gráficos Padrão", Callback = function() Lighting.Brightness = 1 Lighting.ClockTime = 14 Lighting.GlobalShadows = true end end })
+
+-- ==========================================================
+-- 6. ABA TELEPORTES (Funções 47 a 55)
+-- ==========================================================
+TeleportTab:AddSection({ Name = "📍 Locais do Mapa" })
+
+TeleportTab:AddButton({ Name = "47. Teleportar para o Spawn Central", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 15, 0) end end })
+TeleportTab:AddButton({ Name = "48. Teleportar para o Sword Dealer", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(25, 15, 10) end end })
+TeleportTab:AddButton({ Name = "49. Teleportar para a Área Verde", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(-50, 15, -50) end end })
+TeleportTab:AddButton({ Name = "50. Teleportar para o Alto (Sky)", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 300, 0) end end })
+TeleportTab:AddButton({ Name = "51. Teleportar para Posição X: 100", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(100, 15, 0) end end })
+TeleportTab:AddButton({ Name = "52. Teleportar para Posição Z: 100", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 15, 100) end end })
+TeleportTab:AddButton({ Name = "53. Salvar Posição Atual (Checkpoint)", Callback = function() _G.SavedPos = player.Character.HumanoidRootPart.CFrame OrionLib:MakeNotification({Name="Salvo", Content="Posição salva!", Time=2}) end })
+TeleportTab:AddButton({ Name = "54. Ir para Posição Salva", Callback = function() if _G.SavedPos then player.Character.HumanoidRootPart.CFrame = _G.SavedPos end end })
+TeleportTab:AddButton({ Name = "55. Teleportar para o Submundo", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(0, -50, 0) end end })
+
+-- ==========================================================
+-- 7. ABA UTILIDADES (Funções 56 a 63)
+-- ==========================================================
+MiscTab:AddSection({ Name = "⚙️ Ferramentas Gerais" })
+
+MiscTab:AddToggle({ Name = "56. Anti-AFK (Impedir desconexão por inatividade)", Default = true, Callback = function(v) antiAfkActive = v if v then player.Idled:Connect(function() game:GetService("VirtualUser"):CaptureController() game:GetService("VirtualUser"):ClickButton2(Vector2.new()) end) end end })
+MiscTab:AddButton({ Name = "57. Copiar Link do Discord", Callback = function() setclipboard("https://discord.gg/orinhub") end })
+MiscTab:AddButton({ Name = "58. Executar FPS Unlocker Interno", Callback = function() setfpscap(999) end })
+MiscTab:AddButton({ Name = "59. Imprimir Informações do Servidor no Console", Callback = function() print("PlaceID:", game.PlaceId, "JobID:", game.JobId) end })
+MiscTab:AddButton({ Name = "60. Destruir UI e Fechar Script", Callback = function() OrionLib:Destroy() end })
+MiscTab:AddButton({ Name = "61. Notificação de Teste do Hub", Callback = function() OrionLib:MakeNotification({Name="Mooza Hub", Content="Tudo funcionando perfeitamente!", Time=3}) end })
+MiscTab:AddButton({ Name = "62. Limpar Memória Cache do Jogo", Callback = function() collectgarbage("collect") end })
+MiscTab:AddButton({ Name = "63. Mostrar Lista de Jogadores no Console", Callback = function() for _,p in pairs(Players:GetPlayers()) do print(p.Name) end end })
+
+-- ==========================================================
+-- 8. ABA FUNÇÕES EXTRAS (Funções 64 a 70)
+-- ==========================================================
+ExtraTab:AddSection({ Name = "🚀 Recursos Especiais Avançados" })
+
+ExtraTab:AddButton({ Name = "64. Dar Girada Rápida de Câmera (Spinbot)", Callback = function() task.spawn(function() for i=1, 50 do workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame * CFrame.Angles(0, math.rad(45), 0) task.wait(0.01) end end) end })
+ExtraTab:AddButton({ Name = "65. Efeito de Tremor na Tela (Shake)", Callback = function() task.spawn(function() for i=1, 20 do workspace.CurrentCamera.CFrame = workspace.CurrentCamera.CFrame + Vector3.new(math.random(-1,1), math.random(-1,1), 0) task.wait(0.05) end end) end })
+ExtraTab:AddButton({ Name = "66. Recarregar Eventos do ReplicatedStorage", Callback = function() Events = ReplicatedStorage:WaitForChild("Events", 1) end })
+ExtraTab:AddButton({ Name = "67. Ativar Modo Super Dinâmico", Callback = function() workspace.Gravity = 50 OrionLib:MakeNotification({Name="Gravidade", Content="Gravidade reduzida!", Time=2}) end })
+ExtraTab:AddButton({ Name = "68. Restaurar Gravidade Normal", Callback = function() workspace.Gravity = 196.2 end })
+ExtraTab:AddButton({ Name = "69. Duplicar Efeito Visual de Partículas", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then local p = Instance.new("ParticleEmitter", player.Character.HumanoidRootPart) p.Texture = "rbxassetid://6031094667" end end })
+ExtraTab:AddButton({ Name = "70. Ativar Mensagem de Agradecimento do Mooza", Callback = function() OrionLib:MakeNotification({Name="Mooza OP", Content="Obrigado por usar o Orin Hub Professional!", Time=5}) end })
+
+-- ==========================================================
+-- 9. ABA CRÉDITOS
+-- ==========================================================
+CreditTab:AddSection({ Name = "👑 Desenvolvedor Oficial" })
+CreditTab:AddParagraph("Criador Absoluto", "Este script massivo com mais de 70 funções profissionais foi programado, estruturado e otimizado por:\n\n✨ **By : Mooza** ✨")
+CreditTab:AddParagraph("Versão do Sistema", "Orin Hub Mega Professional Edition v7.0\nSegurança otimizada para Roblox Exploits.")
+
+-- Inicialização da Interface
+OrionLib:Init()
