@@ -1,14 +1,12 @@
 -- ==========================================================
--- ORIN HUB | PROTECTED LOADER BY MOOZA 👑
+-- ORIN HUB | CARREGADOR PROTEGIDO POR MOOZA 👑
 -- ==========================================================
 local _ENV_SAFE = getgenv or getfenv
 _ENV_SAFE().MoozaProtectedHub = "OrinHub_v7_Secured"
 
--- Código ofuscado e criptografado para evitar roubo de source
-local encryptedData = "\115\101\116\116\105\110\103\115\95\111\114\105\110\95\115\101\99\117\114\101"
+local encryptedData = "\115\101\116\116\105\110\103\115\95\111\114\105\110\95\115\101\99\117\114\100"
 
 local function loadOrinSecured()
-    -- Carregador seguro do Hub principal do Mooza
     local success, result = pcall(function()
         return game:HttpGet("https://raw.githubusercontent.com/robloxrobloxgames81-hub/orinhub/refs/heads/main/.github/workflows/main.yml")
     end)
@@ -23,5 +21,4 @@ local function loadOrinSecured()
     end
 end
 
--- Execução protegida
 loadOrinSecured()
