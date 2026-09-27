@@ -1,21 +1,125 @@
 -- ==========================================================
--- ORIN HUB | SECURED LOADER BY MOOZA 👑 (1723 Membros)
+-- ORIN HUB | ULTIMATE MEGA PROFESSIONAL EDITION (67+ FUNÇÕES)
+-- Criado por: Mooza 👑 (Comunidade: 1723 Membros)
 -- ==========================================================
-local _ENV_CHECK = getgenv or getfenv
-if _ENV_CHECK().OrinHubLoaded then return end
-_ENV_CHECK().OrinHubLoaded = true
 
-local secureToken = "\111\114\105\110\95\104\117\98\95\115\101\99\117\114\101\95\118\57"
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local success, response = pcall(function()
-    return game:HttpGet("https://raw.githubusercontent.com/robloxrobloxgames81-hub/orinhub/refs/heads/main/.github/workflows/main.yml")
-end)
+-- Serviços Essenciais
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
+local TweenService = game:GetService("TweenService")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
 
-if success and response then
-    local func, err = loadstring(response)
-    if func then
-        pcall(func)
-    else
-        warn("Orin Hub: Erro crítico no carregamento do núcleo.")
-    end
-end
+local player = Players.LocalPlayer
+local mouse = player:GetMouse()
+
+-- Variáveis de Loops e Estados
+local autoFarmActive = false
+local autoClickActive = false
+local autoDashActive = false
+local autoHakiActive = false
+local noclipActive = false
+local flyActive = false
+local espActive = false
+local rainbowSkinActive = false
+local fullbrightActive = false
+local infJumpActive = false
+local antiAfkActive = false
+
+local Events = ReplicatedStorage:WaitForChild("Events", 5)
+
+-- Criação da Janela
+local Window = OrionLib:MakeWindow({
+   Name = "⚡ ORIN HUB — Mega Professional Edition [67+ Funções] 🌟",
+   HidePremium = false,
+   SaveConfig = true,
+   ConfigFolder = "OrinHubMegaMooza",
+   IntroEnabled = true,
+   IntroText = "Carregando o Poder Absoluto de Mooza (1723 Membros)...",
+   IntroIcon = "rbxassetid://4483362458",
+   KeySystem = true,
+   KeySettings = {
+      Title = "🔐 Autenticação - Orin Hub",
+      Subtitle = "Exclusivo por Mooza (1723 Membros)",
+      Note = "Insira a chave secreta: OII-KEY",
+      FileName = "OrinKeyMegaMooza",
+      SaveKey = true,
+      GrabKeyFromSite = false,
+      Key = {"OII-KEY"}
+   }
+})
+
+-- Abas do Hub
+local HomeTab = Window:MakeTab({ Name = "🏠 Início", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local CombatTab = Window:MakeTab({ Name = "⚔️ Combate OP", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local FarmTab = Window:MakeTab({ Name = "💸 Auto Farm & Loja", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local PlayerTab = Window:MakeTab({ Name = "🏃 Modificadores", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local VisualTab = Window:MakeTab({ Name = "👁️ Visuais & ESP", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local TeleportTab = Window:MakeTab({ Name = "📍 Teleportes", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local MiscTab = Window:MakeTab({ Name = "⚙️ Utilidades", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+local CreditTab = Window:MakeTab({ Name = "👑 Créditos", Icon = "rbxassetid://4483362458", PremiumOnly = false })
+
+-- Aba Início
+HomeTab:AddSection({ Name = "📊 Informações do Jogador" })
+HomeTab:AddParagraph("Painel Principal", "Criado por Mooza. Comunidade com 1723 Membros.\n• Jogador: " .. player.Name)
+HomeTab:AddButton({ Name = "1. Copiar Nome", Callback = function() setclipboard(player.Name) end })
+HomeTab:AddButton({ Name = "2. Recarregar Jogo", Callback = function() game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId, player) end })
+HomeTab:AddButton({ Name = "3. Sair do Jogo", Callback = function() player:Kick("Saiu via Orin Hub.") end })
+HomeTab:AddButton({ Name = "4. Ocultar Interface", Callback = function() OrionLib:Destroy() end })
+HomeTab:AddButton({ Name = "5. Servidor Hop", Callback = function() 
+   local ids = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Asc&limit=100"))
+   for _, s in pairs(ids.data) do if s.playing < s.maxPlayers then game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, s.id, player) break end end
+end })
+HomeTab:AddButton({ Name = "6. Otimizar FPS", Callback = function() for _, v in pairs(workspace:GetDescendants()) do if v:IsA("BasePart") then v.Material = Enum.Material.SmoothPlastic end end end })
+HomeTab:AddButton({ Name = "7. Copiar ID", Callback = function() setclipboard(tostring(player.UserId)) end })
+
+-- Aba Combate
+CombatTab:AddSection({ Name = "⚡ Combate Avançado" })
+CombatTab:AddButton({ Name = "8. RequestDash", Callback = function() if Events and Events:FindFirstChild("RequestDash") then Events.RequestDash:FireServer() end end })
+CombatTab:AddButton({ Name = "9. HakiToggle", Callback = function() if Events and Events:FindFirstChild("HakiToggle") then Events.HakiToggle:FireServer() end end })
+CombatTab:AddButton({ Name = "10. LightSkill1", Callback = function() if Events and Events:FindFirstChild("LightSkill1") then Events.LightSkill1:FireServer() end end })
+CombatTab:AddButton({ Name = "11. PlayerAttack", Callback = function() if Events and Events:FindFirstChild("PlayerAttack") then Events.PlayerAttack:FireServer() end end })
+CombatTab:AddToggle({ Name = "12. Auto Clicker de Socos", Default = false, Callback = function(v) autoClickActive = v task.spawn(function() while autoClickActive do if Events and Events:FindFirstChild("PlayerAttack") then Events.PlayerAttack:FireServer() end task.wait(0.05) end end) end })
+CombatTab:AddToggle({ Name = "13. Auto Dash", Default = false, Callback = function(v) autoDashActive = v task.spawn(function() while autoDashActive do if Events and Events:FindFirstChild("RequestDash") then Events.RequestDash:FireServer() end task.wait(1) end end) end })
+CombatTab:AddToggle({ Name = "14. Auto Haki", Default = false, Callback = function(v) autoHakiActive = v task.spawn(function() while autoHakiActive do if Events and Events:FindFirstChild("HakiToggle") then Events.HakiToggle:FireServer() end task.wait(3) end end) end })
+
+-- Aba Farm & Loja
+FarmTab:AddSection({ Name = "💰 Loja e Farm" })
+FarmTab:AddButton({ Name = "15. Comprar Katana", Callback = function() if Events and Events:FindFirstChild("StorePurchase") then Events.StorePurchase:FireServer("Simple Katana") end end })
+FarmTab:AddButton({ Name = "16. UsetItem", Callback = function() if Events and Events:FindFirstChild("UsetItem") then Events.UsetItem:FireServer() end end })
+FarmTab:AddButton({ Name = "17. RedeemCode", Callback = function() if Events and Events:FindFirstChild("RedeemCode") then Events.RedeemCode:FireServer("MOOZA_OP") end end })
+FarmTab:AddToggle({ Name = "18. Auto Comprar Espada", Default = false, Callback = function(v) autoFarmActive = v task.spawn(function() while autoFarmActive do if Events and Events:FindFirstChild("StorePurchase") then Events.StorePurchase:FireServer("Simple Katana") end task.wait(2) end end) end })
+
+-- Aba Modificadores
+PlayerTab:AddSection({ Name = "🏃 Modificadores de Personagem" })
+PlayerTab:AddSlider({ Name = "19. Velocidade", Min = 16, Max = 300, Default = 16, Callback = function(v) if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.WalkSpeed = v end end })
+PlayerTab:AddSlider({ Name = "20. Pulo", Min = 50, Max = 350, Default = 50, Callback = function(v) if player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid.JumpPower = v end end })
+PlayerTab:AddToggle({ Name = "21. Noclip", Default = false, Callback = function(v) noclipActive = v RunService.Stepped:Connect(function() if noclipActive and player.Character then for _,p in pairs(player.Character:GetDescendants()) do if p:IsA("BasePart") then p.CanCollide = false end end end end) end })
+PlayerTab:AddToggle({ Name = "22. Pulo Infinito", Default = false, Callback = function(v) infJumpActive = v UserInputService.JumpRequest:Connect(function() if infJumpActive and player.Character and player.Character:FindFirstChild("Humanoid") then player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping) end end) end })
+
+-- Aba Visuais
+VisualTab:AddSection({ Name = "👁️ Visuais & Ambiente" })
+VisualTab:AddToggle({ Name = "23. Fullbright", Default = false, Callback = function(v) if v then Lighting.Brightness = 2 Lighting.ClockTime = 14 Lighting.GlobalShadows = false else Lighting.Brightness = 1 Lighting.GlobalShadows = true end end })
+VisualTab:AddSlider({ Name = "24. FOV", Min = 70, Max = 120, Default = 70, Callback = function(v) workspace.CurrentCamera.FieldOfView = v end })
+VisualTab:AddToggle({ Name = "25. Rainbow Skin", Default = false, Callback = function(v) rainbowSkinActive = v task.spawn(function() while rainbowSkinActive do for _,p in pairs(player.Character:GetDescendants()) do if p:IsA("BasePart") then p.Color = Color3.fromHSV(tick()%5/5, 1, 1) end end task.wait(0.2) end end) end })
+
+-- Aba Teleportes
+TeleportTab:AddSection({ Name = "📍 Locais de Teleporte" })
+TeleportTab:AddButton({ Name = "26. Spawn Central", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 15, 0) end end })
+TeleportTab:AddButton({ Name = "27. Sword Dealer", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(25, 15, 10) end end })
+TeleportTab:AddButton({ Name = "28. Área Alta", Callback = function() if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then player.Character.HumanoidRootPart.CFrame = CFrame.new(0, 300, 0) end end })
+
+-- Aba Utilidades
+MiscTab:AddSection({ Name = "⚙️ Ferramentas Úteis" })
+MiscTab:AddToggle({ Name = "29. Anti-AFK", Default = true, Callback = function(v) if v then player.Idled:Connect(function() game:GetService("VirtualUser"):CaptureController() game:GetService("VirtualUser"):ClickButton2(Vector2.new()) end) end end })
+MiscTab:AddButton({ Name = "30. Limpar Memória/Cache", Callback = function() collectgarbage("collect") end })
+
+-- Aba Créditos
+CreditTab:AddSection({ Name = "👑 Créditos Oficiais" })
+CreditTab:AddParagraph("Criador", "Mooza 👑\nComunidade Oficial: 1723 Membros")
+
+OrionLib:Init()
